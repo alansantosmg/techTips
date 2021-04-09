@@ -195,3 +195,76 @@ mv fusioninventory /var/www/html/glpi/plugins
 Configurar -> Plugins -> fusioninventory +
 
 Após configurar, habilitar o plugin
+
+
+## Habilitar extensões GLPI (Segurança)
+
+Enable bz2 extension at `php.ini`
+
+```bash
+
+sudo apt-get install php7.4-zip php7.4bz2
+sudo service apache2 restart
+
+```
+
+## Configurar email - notificações GLPI
+
+- Gmail:  
+  - smtp+ssl : usar porta 465
+  - smtp + tls: usar porta 587
+- Office 365:
+  - Email do admiministrador precisa ser igual em todos os campos
+  - smtp + tls: user porta 587 + certificado
+
+## Proteger diretórios do GLPI
+
+Alterar o arquivo `apache2.conf`: 
+
+De: 
+
+```xml
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+
+```
+Para: 
+
+```xml
+
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+
+```
+
+## LDAP Filter for GLPI
+
+```
+dc=acotel,dc=local
+(&  (&(objectClass=user)(objectCategory=person)))
+
+```
+## Set Active directory Max Connections
+Deve ser usado se houver problemas ao importar usuários para GLPI. 
+
+Abrir prompt de comando e executar: 
+
+```
+ntdsutil
+LDAP policies
+connections
+connect to server actad02
+q
+Show values
+Ldap policies
+Set Maxconnections to 10000
+commit changes
+Show values
+q
+```
