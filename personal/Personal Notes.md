@@ -6,7 +6,7 @@
 - [Personal notes](#personal-notes)
   - [index](#index)
   - [My Next lectures](#my-next-lectures)
-    - [Lectures to learn english language](#lectures-to-learn-english-language)
+    - [Lectures to learn English language](#lectures-to-learn-english-language)
     - [Business](#business)
   - [Ocorrência Fernanda](#ocorrência-fernanda)
   - [Prefered Fragrances](#prefered-fragrances)
@@ -16,7 +16,7 @@
 
 ## My Next lectures
 
-### Lectures to learn english language
+### Lectures to learn English language
 
 - Charlote's webs - `E.B. White`
 - The wonderful Wizard of the Oz - `L. Frank Baum`
@@ -74,3 +74,5 @@ Agradeça e aproveite a lição.
 - **Filtro Combustivel:**
 - **Alinhamento:** Jan/2021
 - **Balanceamento:** Jan/2021
+
+

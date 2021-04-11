@@ -43,7 +43,7 @@ One of the most notable capability of OneNote is syncing. I often use Git and Gi
 
 So, I did a private Github repo named `myNotes`. This repo is synced to my local environment using Git. 
 
-Inside of `myNotes` folder I created several folders, corresponding to OneNotes sections. Inside each section folder I have markdown files (.md) corresponding to OneNote pages. 
+Inside of `myNotes` folder I created several folders, corresponding to OneNote's sections. Inside each section folder I have markdown files (.md) corresponding to OneNote pages. 
 
 There's no auto syncing and it's a downside of my solution. Instead, I do  `git add` and `git commit` commands as I do in my normal dayly workflow. 
 
@@ -51,17 +51,18 @@ To take notes I use the Visual Studio Code (vscode) as my primary tool. I can do
 
 Some vscode extensions are mandatory: 
 
-- **Markdown All in one**. It's a swarm knife. It can be used to format text and code following the Mardown notation, leaving me about boring tasks like create lists, tables and TOCs (Table of Contents).
-- **Markdown Lint**. This extension helps me to check the markdown sintax of my documents. 
-- **Mardown Preview**. This is a good extension to get affordable document previews. It's possibile to create standalone and synced document previews.
+- **Markdown All in one**. It's a swarm knife. It can be used to format text and code following the Markdown notation, leaving me about boring tasks like create lists, tables and TOCs (Table of Contents).
+- **Markdown Lint**. This extension helps me to check the markdown syntax of my documents. 
+- **Markdown Preview**. This is a good extension to get affordable document previews. It's possible to create standalone and synced document previews.
 - **Song txt**. It's used to create guitar tablatures.    
 
 When I'm only with the cellphone, I still using OneNote. It's especially useful taking notes on the road or while I'm talking to someone. Later the notes are converted to markdown files if necessary. 
 
 I can clone myNotes repo on windows or linux without necessary stay connected all time. 
 When I have doubts about certain contents it's possible to use git branches. 
-I also can reuse pieces of my contents to create new documents like blog entries or a post in a social media, without leave the vscode (getting more information value). 
+I also can reuse pieces of my content to create new documents like blog entries or a post in a social media, without leave the vscode (getting more information value). 
 At last, using the github app, I can access all my notes from my cell or any other device. 
+
 
 
 
