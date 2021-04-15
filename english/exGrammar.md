@@ -3,25 +3,28 @@
 ## 1 am/is/are
 
 ### 1.1 
+
 1. she's 
 2. they're
 3. isn't
 4. that's
 5. I'm not
-6. you aren't 
+6. you aren't
 
 ### 1.2 
-1. The weather is nice today. 
+
+1. The weather is nice today.
 2. I'm not rich.
-3. This bag is heavy. 
-4. These bags are heavy. 
+3. This bag is heavy.
+4. These bags are heavy.
 5. Look! There is Helen. 
-6. My brother and I are tennis players. 
+6. My brother and I are tennis players.
 7. Emily is at home. 
 8. Her children is at school.
 9. I'm a taxi driver. My sister is a nurse. 
 
 ### 1.3
+
 1. Steve is ill. He's in the bed. 
 2. I'm not hungry. but I'm thisrty.
 3. Mr. Thomas is a very old man. He's 98. 
@@ -32,6 +35,7 @@
 8. Here is your coat. Ok. Thank you very much. 
 
 ### 1.4
+
 1. My name is Alan. 
 2. I'm 47 years old. 
 3. I'm from Contagem. 
@@ -40,6 +44,7 @@
 6. I'm interested in techonoloy and music. 
 
 ### 1.5 
+
 1. She's thirsty. They are cold. 
 3. He's hot. 
 4. He's scared. 
@@ -47,6 +52,7 @@
 6. She's angry. 
 
 ### 1.6
+
 1. It isn't hot today. 
 2. It's windy today.  It's not windy today. 
 3. My hands are cold.
@@ -63,6 +69,7 @@
 ## Unit 2
 
 ### 2.1
+
 - Where's the camera? It's in your bag. 
 - Is your car blue? No it's black.
 - Am I late? Yes, you are. 
@@ -73,6 +80,7 @@
 - Who's that woman? She's my sister. 
 
 ### 2.2 
+
 1. Is your mother at home?
 2. Are your parents well?
 3. Is your job interesting?
@@ -84,6 +92,7 @@
 9. Why are you late?
 
 ### 2.3 
+
 1. Who are your parents?
 2. Where's the bus stop?
 3. How old are your children?
@@ -93,6 +102,7 @@
 7. What color are your new shoes?
 
 ### 2.4
+
 1. What's your name? My name is Paul. 
 2. Are you American? No, I'm Australian. 
 3. How old are you? I'm 30
