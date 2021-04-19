@@ -71,5 +71,3 @@ Se o projeto for medido em minutos e horas o regime de trabalho dele deve reflet
 
 ## EAP e cronograma
 
-##
-

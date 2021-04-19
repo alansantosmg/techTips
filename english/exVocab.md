@@ -283,9 +283,3 @@ My daugther is very young. She has only 7 years old. She's a beautiful girl. She
 ## 9 - Conversations Useful words and expressions. 
 
 
-
-
-
-
-
-cd / 
