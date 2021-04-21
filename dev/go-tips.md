@@ -97,7 +97,7 @@ godoc -http=localhost:6060
 ### Criando um slice
 
 * Slice c/ elementos mas sem tamanho fixo
-  
+  m
 `aSliceliteral := []int{1,2,3,4}`
 
 * Slice s/ elementos mas de tamanho fixo
@@ -160,6 +160,7 @@ for {
    break
 }
 ```
+`Use continue para quebrar a interação do loop`
 
 ## If clause
 
@@ -229,6 +230,12 @@ int64    –9,223,372,036,854,775,808 to
          9,223,372,036,854,775,807 64-bit (eight bytes)
 uint64   0 to 18,446,744,073,709,551,615
 ```
+
+**Atenção Atenção Atenção:**
+Se você atribuir valor superior ao limite de um tipo, ocorrerá overflow.
+
+Porém, se você adicionar um número além do limite de um valor já atribuído, aquele int irá zerar e começará a contar de novo! 
+
 
 ## Pacotes interessantes
 
@@ -366,13 +373,122 @@ for i := 0; i< len(runes); i++{
 
 ## Trabalhando com Slices
 
-É possível adicionar multiplos parametros em um slice usando append.
+É possível adicionar multiplos itens em um slice usando append.
 No exemplo abaixo são adicionados dados de um slice dentro de outro slice usando append. Verifique a notação de 3 pontos.
 
 ```go
 locales :=  []string{"locale1", "locale2"}
 var extraLocals []string
 locales = append(locales, extraLocals...)
+```
+
+### Excluir item de slice
+
+```go
+	sabores := []string{"peperonni", "mussarela", "abacaxi", "marguerita", "quatroqueijos"}
+
+
+	// inclui indice zero até 1.  
+	// 2 fica de fora
+	fatia := sabores[0:2]
+	fmt.Println(fatia)
+
+	// inclui indice 3 até o final
+	fatia2 := sabores[3:]
+	fmt.Println(fatia2)
+
+	// exclui item de um slice
+	// 0 a 1 e 3 até o final.
+	// item 2 é excluido do slice
+	fatia3 := append(sabores[0:2], sabores[3:]...)
+   	fmt.Println(fatia3)
+
+}
+
+```
+### Adicionar um slice em outro slice
+
+```go
+umaslice := []int{1,2,3,4}
+outraslice := []int{9,10,11,12}
+
+// adiciona multiplos itens do mesmo tipo na slice
+umaslice = append(umaslice, 5,6,7,8)
+
+// não funciona, pois o segundo parametro 
+// deve ser o tipo do conteudo da umaslice (no caso são int)
+// o que foi fornecido foi um  tipo "outraslice de int"
+umaslice = append(umaslice, outraslice)
+
+// o correto é adicionar o CONTEUDO de outraslice (que tb é int)
+// para isso usase o unfurl ou seja, os três pontinhos
+umaslice = append(umaslice, outraslice...)
+
+// os três pontinhos significa = conteúdo da slice. 
+```
+
+
+### Make e slices
+`make([]T, len, cap) `
+len = tamanho
+cap = capacidade 
+
+`slice := make([]int, 5, 10)`  
+
+	Se eu crio um slice com tamanho 5 e capacidade 10, eu posso ir adicionando elementos com append.  
+	Ao adicionar elementos com append, após exceder o len inicial, eu irei aumentando o len.  
+	Se o len passar a capacidade, Go irá jogar fora o slice e criará um novo len atual mas dobro da capacidade.
+
+### Slice of slice
+
+```go
+
+bidimensional := [][]int{
+		{0, 1, 2, 3},
+		{4, 5, 6},
+	}
+
+	fmt.Println(bidimensional[1][0])  \\ result 4
+
+```
+### Pegadinha do malandro com Slices
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+
+	// Cria primeiro slice com tamanho 5 e capacidade 5
+
+	// Preenche primeiro slice com dados
+	primeiroSlice := []string{"a", "b", "c", "d", "e"}
+
+	// Mostra primeiro slice cheio
+	// Resultado: [a b c d e]
+	fmt.Println(primeiroSlice)
+
+	// Cria segundo slice com elementos do primeiro slice: a, d, e
+	segundoSlice := append(primeiroSlice[:1], primeiroSlice[3:]...)
+
+	// Mostra segundo slice
+	// Resultado [a d e]
+	fmt.Println(segundoSlice)
+
+	// Pegadinha do malandro
+	// Resultado [a d e d e]
+	fmt.Println(primeiroSlice)
+
+	// Explicação:
+	// Quando Go vai fazer o segundo slice ele refatia o primeiro slice/array subjacente
+	// Refatiar = Refazer
+	// Licão: Cuidado ao trabalhar com Slices.
+
+}
+
+
 ```
 
 ## Funções variádicas
@@ -566,3 +682,44 @@ Depende do relatório de cobertura gerado com go test.
 
 Retorna tempo de forma mais amigável:****
 `time.Now().Format(time.ANSIC)`
+
+
+## Maps
+
+```go
+
+	// Create slice
+	amigos := map[string]int{
+		"alfredo": 555234,
+		"joana":   999674,
+	}
+
+	// add slice item
+	amigos["gopher"] = 444444
+
+	// show item non existent in map
+	fmt.Println(amigos["romario"])
+
+	// show slice
+	fmt.Println("amigos")
+	fmt.Println(amigos["joana"])
+
+	// Verificar se existe item no mapa - COMMA OK IDIOM
+
+	// atribui item a ser testado a variavel
+	testeFantasma, ok := amigos["fantasma"]
+
+	// mostra item e verifica se existe
+	fmt.Println(testeFantasma, ok) // 0, false
+
+	// teste de existencia com if
+	if testeFantasma2, ok := amigos["fantasma"]; !ok {
+		fmt.Println("não existe no map")
+	} else {
+		fmt.Println(testeFantasma2)
+	}
+
+}
+
+
+```
