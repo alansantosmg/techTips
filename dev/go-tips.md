@@ -712,6 +712,8 @@ Retorna tempo de forma mais amigável:****
 	// mostra item e verifica se existe
 	fmt.Println(testeFantasma, ok) // 0, false
 
+	
+
 	// teste de existencia com if
 	if testeFantasma2, ok := amigos["fantasma"]; !ok {
 		fmt.Println("não existe no map")
