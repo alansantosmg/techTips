@@ -1,6 +1,7 @@
 # Go Tips
 
-23/04/2020 23:52## Fluxo de trabalho em Go
+
+## Workflow Go projects
 
 1. Criar git branch p/ feature ou correção
 2. Criar o teste
@@ -18,58 +19,59 @@
 
 ## Consulta documentação
 
-```https://golang.org/pkg/nomeDoPacote
-   https://golang.org/cmd/nomeDoComando
-```
+[Packages buit-in](https://golang.org/pkg/nomeDoPacote)
+[Go CLI Commands](https://golang.org/cmd/nomeDoComando)
+
 
 ## Basic Go program
 
-```go
-package main
-import "fmt"
-func main() {
-   fmt.Println("vim-go")
-}
-```
+Hello World!  
+[Programa básico](https://play.golang.org/p/HmnNoBf0p1z)
 
-## Basic program Domain separate
 
-```go
-package main
-import "fmt"
+## Separação de domínios
 
-func goHello() string{ // Function is out of main
-  return "Hello World"
-}
+Separar um programa em domínios facilita testá-lo e também em dividi-lo em partes menores e mais lógicas. 
 
-func main(){
-   fmt.Println(goHello())
-}
+[Exemplo 1 - Separação de domínios - Hello World](https://play.golang.org/p/AEsLuSs7EL3)
 
-```
+
 
 ## local de instalação
 
-Go é instalado em `usr/local/bin`.
-Adicionar ao `.profile`:
+### Linux
+
+Go é instalado em `usr/local/bin`.  
+O workspace do usuário normalmente é em `/home/username/go`.
+
+#### Ajustar ambiente (GOPATH e GOROOT)
+
+
+Adicionar ao arquivo  `.profile` do usuário:
 
 ```go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 ```
 
-## construir o godoc
+## GO Doc
 
+### Instalar Go Doc
+
+[Sobre Go doc](https://www.bswen.com/2020/07/How-to-install-godoc-tool-for-golang.html)
+
+#### Windows
+ `go get -v  golang.org/x/tools/cmd/godoc`
+
+#### Linux
 ```go
 cd / $GOPATH/src/golang.org/x/tools/cmd/godoc
 go build -o $GOPATH/bin/godoc
 ```
 
-## Acessar o godoc
+### Acessar o godoc
 
-```go
-godoc -http=localhost:6060
-```
+`godoc -http=localhost:6060`
 
 ## Peculiaridades do GO
 
@@ -493,29 +495,16 @@ func main() {
 
 ## Funções variádicas
 
-uma função variádica pode receber n parametros.
-O parâmetro varidádico tem que ser u último.
+Uma função variádica pode receber n parametros.
+O parâmetro varidádico tem que ser o último.
 A função converte os valores recebidos em um slice.
 Para mandar um slice para uma função com parametro variadico int
 é preciso usar notação de 3 pontos.
 Assim o slice é unpacked para int.
 Vide exemplo abaixo:  
 
-```go
-func main() {
-   i := []int{5, 10, 15}
-   fmt.Println(sum(5, 4))
-   fmt.Println(sum(i...))
-}
-
-func sum(number ...int) (result int) {
-
-   for i := range number {
-      result += number[i]
-   }
-   return result
-}
-```
+[Função variadia - exemplo1](https://play.golang.org/p/CRxrlqYe5hv)
+[Função varidica - exemplo2](https://play.golang.org/p/lYQyIUp975j)
 
 ## - Funções - Clousure
 
@@ -723,5 +712,31 @@ Retorna tempo de forma mais amigável:****
 
 }
 
+```
+
+## Structs
+
+Structs anomima com mapa e Slice embutidos: 
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+
+	alan := struct {
+		telefone map[string]int
+		idiomas  []string
+	}{
+		telefone: map[string]int{
+			"celular": 22222222},
+		idiomas: []string{"ingles", "portugues"},
+	}
+
+	fmt.Println(alan)
+
+}
 
 ```
