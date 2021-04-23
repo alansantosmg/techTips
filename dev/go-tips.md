@@ -37,7 +37,7 @@ Separar um programa em domínios facilita testá-lo e também em dividi-lo em pa
 
 
 
-## local de instalação
+## Instalação do GO
 
 ### Linux
 
@@ -99,7 +99,7 @@ go build -o $GOPATH/bin/godoc
 ### Criando um slice
 
 * Slice c/ elementos mas sem tamanho fixo
-  m
+  
 `aSliceliteral := []int{1,2,3,4}`
 
 * Slice s/ elementos mas de tamanho fixo
@@ -110,6 +110,126 @@ go build -o $GOPATH/bin/godoc
 * Para realizar cópia entre arrays e Slices é necessário converter array para slice com a notação [:]
 
 * Ao copiar um array para um slice o slice será reduzido ou aumentado para o tamanho do array e e seus elementos serão preservados.
+
+
+### Trabalhando com Slices
+
+É possível adicionar multiplos itens em um slice usando append.
+No exemplo abaixo são adicionados dados de um slice dentro de outro slice usando append. Verifique a notação de 3 pontos.
+
+```go
+locales :=  []string{"locale1", "locale2"}
+var extraLocals []string
+locales = append(locales, extraLocals...)
+```
+
+#### Excluir item de slice
+
+```go
+	sabores := []string{"peperonni", "mussarela", "abacaxi", "marguerita", "quatroqueijos"}
+
+
+	// inclui indice zero até 1.  
+	// 2 fica de fora
+	fatia := sabores[0:2]
+	fmt.Println(fatia)
+
+	// inclui indice 3 até o final
+	fatia2 := sabores[3:]
+	fmt.Println(fatia2)
+
+	// exclui item de um slice
+	// 0 a 1 e 3 até o final.
+	// item 2 é excluido do slice
+	fatia3 := append(sabores[0:2], sabores[3:]...)
+   	fmt.Println(fatia3)
+
+}
+
+```
+#### Adicionar um slice em outro slice
+
+```go
+umaslice := []int{1,2,3,4}
+outraslice := []int{9,10,11,12}
+
+// adiciona multiplos itens do mesmo tipo na slice
+umaslice = append(umaslice, 5,6,7,8)
+
+// não funciona, pois o segundo parametro 
+// deve ser o tipo do conteudo da umaslice (no caso são int)
+// o que foi fornecido foi um  tipo "outraslice de int"
+umaslice = append(umaslice, outraslice)
+
+// o correto é adicionar o CONTEUDO de outraslice (que tb é int)
+// para isso usase o unfurl ou seja, os três pontinhos
+umaslice = append(umaslice, outraslice...)
+
+// os três pontinhos significa = conteúdo da slice. 
+```
+
+
+#### Make e slices
+`make([]T, len, cap) `
+len = tamanho
+cap = capacidade 
+
+`slice := make([]int, 5, 10)`  
+
+	Se eu crio um slice com tamanho 5 e capacidade 10, eu posso ir adicionando elementos com append.  
+	Ao adicionar elementos com append, após exceder o len inicial, eu irei aumentando o len.  
+	Se o len passar a capacidade, Go irá jogar fora o slice e criará um novo len atual mas dobro da capacidade.
+
+#### Slice of slice
+
+```go
+
+bidimensional := [][]int{
+		{0, 1, 2, 3},
+		{4, 5, 6},
+	}
+
+	fmt.Println(bidimensional[1][0])  \\ result 4
+
+```
+#### Pegadinha do malandro com Slices
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+
+	// Cria primeiro slice com tamanho 5 e capacidade 5
+
+	// Preenche primeiro slice com dados
+	primeiroSlice := []string{"a", "b", "c", "d", "e"}
+
+	// Mostra primeiro slice cheio
+	// Resultado: [a b c d e]
+	fmt.Println(primeiroSlice)
+
+	// Cria segundo slice com elementos do primeiro slice: a, d, e
+	segundoSlice := append(primeiroSlice[:1], primeiroSlice[3:]...)
+
+	// Mostra segundo slice
+	// Resultado [a d e]
+	fmt.Println(segundoSlice)
+
+	// Pegadinha do malandro
+	// Resultado [a d e d e]
+	fmt.Println(primeiroSlice)
+
+	// Explicação:
+	// Quando Go vai fazer o segundo slice ele refatia o primeiro slice/array subjacente
+	// Refatiar = Refazer
+	// Licão: Cuidado ao trabalhar com Slices.
+
+}
+
+```
   
 ## trabalhando com módulos
 
@@ -141,7 +261,8 @@ go build -o $GOPATH/bin/godoc
 
 ## Go command line
 
-### Formata documentos recursivamente
+### GO fmt 
+Formata documentos recursivamente
 
 `go fmt ./...`
 
@@ -254,6 +375,21 @@ bigA := big.NewInt(math.MaxInt64)
 bigA.Add(bigA, big.NewInt(1))
 ```
 
+### `math/rand`
+
+Usado para gerar numeros aleatórios
+Exemplo:
+
+```go
+
+// gera numero aleatorio entre 1  e 10 
+int a := rand.Intn(10)+1
+
+// semeando um numero aleatorio
+rand.Seed(time.Now().UnixNano())
+
+```
+
 ### `unicode`
 
 Util para checar caracteres de uma string
@@ -274,20 +410,7 @@ func checaTexto(meuTexto string) bool{
 }
 ```
 
-### `math/rand`
 
-Usado para gerar numeros aleatórios
-Exemplo:
-
-```go
-
-// gera numero aleatorio entre 1  e 10 
-int a := rand.Intn(10)+1
-
-// semeando um numero aleatorio
-rand.Seed(time.Now().UnixNano())
-
-```
 
 ### `time`
 
@@ -320,6 +443,7 @@ strings.Trim(v)
 strings.ToLower(v)
 
 ```
+
 
 ## Declarando strings
 
@@ -373,125 +497,6 @@ for i := 0; i< len(runes); i++{
 }
 ```
 
-## Trabalhando com Slices
-
-É possível adicionar multiplos itens em um slice usando append.
-No exemplo abaixo são adicionados dados de um slice dentro de outro slice usando append. Verifique a notação de 3 pontos.
-
-```go
-locales :=  []string{"locale1", "locale2"}
-var extraLocals []string
-locales = append(locales, extraLocals...)
-```
-
-### Excluir item de slice
-
-```go
-	sabores := []string{"peperonni", "mussarela", "abacaxi", "marguerita", "quatroqueijos"}
-
-
-	// inclui indice zero até 1.  
-	// 2 fica de fora
-	fatia := sabores[0:2]
-	fmt.Println(fatia)
-
-	// inclui indice 3 até o final
-	fatia2 := sabores[3:]
-	fmt.Println(fatia2)
-
-	// exclui item de um slice
-	// 0 a 1 e 3 até o final.
-	// item 2 é excluido do slice
-	fatia3 := append(sabores[0:2], sabores[3:]...)
-   	fmt.Println(fatia3)
-
-}
-
-```
-### Adicionar um slice em outro slice
-
-```go
-umaslice := []int{1,2,3,4}
-outraslice := []int{9,10,11,12}
-
-// adiciona multiplos itens do mesmo tipo na slice
-umaslice = append(umaslice, 5,6,7,8)
-
-// não funciona, pois o segundo parametro 
-// deve ser o tipo do conteudo da umaslice (no caso são int)
-// o que foi fornecido foi um  tipo "outraslice de int"
-umaslice = append(umaslice, outraslice)
-
-// o correto é adicionar o CONTEUDO de outraslice (que tb é int)
-// para isso usase o unfurl ou seja, os três pontinhos
-umaslice = append(umaslice, outraslice...)
-
-// os três pontinhos significa = conteúdo da slice. 
-```
-
-
-### Make e slices
-`make([]T, len, cap) `
-len = tamanho
-cap = capacidade 
-
-`slice := make([]int, 5, 10)`  
-
-	Se eu crio um slice com tamanho 5 e capacidade 10, eu posso ir adicionando elementos com append.  
-	Ao adicionar elementos com append, após exceder o len inicial, eu irei aumentando o len.  
-	Se o len passar a capacidade, Go irá jogar fora o slice e criará um novo len atual mas dobro da capacidade.
-
-### Slice of slice
-
-```go
-
-bidimensional := [][]int{
-		{0, 1, 2, 3},
-		{4, 5, 6},
-	}
-
-	fmt.Println(bidimensional[1][0])  \\ result 4
-
-```
-### Pegadinha do malandro com Slices
-
-```go
-
-package main
-
-import "fmt"
-
-func main() {
-
-	// Cria primeiro slice com tamanho 5 e capacidade 5
-
-	// Preenche primeiro slice com dados
-	primeiroSlice := []string{"a", "b", "c", "d", "e"}
-
-	// Mostra primeiro slice cheio
-	// Resultado: [a b c d e]
-	fmt.Println(primeiroSlice)
-
-	// Cria segundo slice com elementos do primeiro slice: a, d, e
-	segundoSlice := append(primeiroSlice[:1], primeiroSlice[3:]...)
-
-	// Mostra segundo slice
-	// Resultado [a d e]
-	fmt.Println(segundoSlice)
-
-	// Pegadinha do malandro
-	// Resultado [a d e d e]
-	fmt.Println(primeiroSlice)
-
-	// Explicação:
-	// Quando Go vai fazer o segundo slice ele refatia o primeiro slice/array subjacente
-	// Refatiar = Refazer
-	// Licão: Cuidado ao trabalhar com Slices.
-
-}
-
-
-```
 
 ## Funções variádicas
 
@@ -503,7 +508,7 @@ Para mandar um slice para uma função com parametro variadico int
 Assim o slice é unpacked para int.
 Vide exemplo abaixo:  
 
-[Função variadia - exemplo1](https://play.golang.org/p/CRxrlqYe5hv)
+[Função variadia - exemplo1](https://play.golang.org/p/xYG5aWNyLbN)
 [Função varidica - exemplo2](https://play.golang.org/p/lYQyIUp975j)
 
 ## - Funções - Clousure
@@ -716,6 +721,7 @@ Retorna tempo de forma mais amigável:****
 
 ## Structs
 
+
 Structs anomima com mapa e Slice embutidos: 
 
 ```go
@@ -740,3 +746,11 @@ func main() {
 }
 
 ```
+
+## Defer (adiar)
+
+Defer adia a execução de uma instrução no programa. 
+Se tiver mais de um, a primeira instrução com DEFER   entrar na fila é o última a ser executada. O ponto de execução é a função na qual o DEFER foi criado, ou seja, ele executa a instrução antes da função encerrar (que pode ser antes do retorno). 
+
+[Exemplo - DEFER](https://play.golang.org/p/2wXTPjwYt4V)
+
