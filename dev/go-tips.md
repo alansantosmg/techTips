@@ -19,8 +19,8 @@
 
 ## Consulta documentação
 
-[Packages buit-in](https://golang.org/pkg/nomeDoPacote)
-[Go CLI Commands](https://golang.org/cmd/nomeDoComando)
+[Packages buit-in](https://golang.org/pkg)
+[Go CLI Commands](https://golang.org/cmd)
 
 
 ## Basic Go program
@@ -205,6 +205,7 @@ for i := 0; i< len(runes); i++{
    fmt.Print(string(runes[i]), " ")
 }
 ```
+
 ## Tipos compostos
 
 ### Arrays x Slices
@@ -270,6 +271,7 @@ locales = append(locales, extraLocals...)
 }
 
 ```
+
 ##### Adicionar um slice em outro slice
 
 ```go
@@ -315,85 +317,16 @@ bidimensional := [][]int{
 	fmt.Println(bidimensional[1][0])  \\ result 4
 
 ```
+
 ##### Pegadinha do malandro com Slices
 
-```go
+[Exemplo 1 - Pegadinha Slice](https://play.golang.org/p/Xt4OiGrLLKg)
 
-package main
 
-import "fmt"
-
-func main() {
-
-	// Cria primeiro slice com tamanho 5 e capacidade 5
-
-	// Preenche primeiro slice com dados
-	primeiroSlice := []string{"a", "b", "c", "d", "e"}
-
-	// Mostra primeiro slice cheio
-	// Resultado: [a b c d e]
-	fmt.Println(primeiroSlice)
-
-	// Cria segundo slice com elementos do primeiro slice: a, d, e
-	segundoSlice := append(primeiroSlice[:1], primeiroSlice[3:]...)
-
-	// Mostra segundo slice
-	// Resultado [a d e]
-	fmt.Println(segundoSlice)
-
-	// Pegadinha do malandro
-	// Resultado [a d e d e]
-	fmt.Println(primeiroSlice)
-
-	// Explicação:
-	// Quando Go vai fazer o segundo slice ele refatia o primeiro slice/array subjacente
-	// Refatiar = Refazer
-	// Licão: Cuidado ao trabalhar com Slices.
-
-}
-
-```
   
 ## Maps
 
-```go
-
-	// Create slice
-	amigos := map[string]int{
-		"alfredo": 555234,
-		"joana":   999674,
-	}
-
-	// add slice item
-	amigos["gopher"] = 444444
-
-	// show item non existent in map
-	fmt.Println(amigos["romario"])
-
-	// show slice
-	fmt.Println("amigos")
-	fmt.Println(amigos["joana"])
-
-	// Verificar se existe item no mapa - COMMA OK IDIOM
-
-	// atribui item a ser testado a variavel
-	testeFantasma, ok := amigos["fantasma"]
-
-	// mostra item e verifica se existe
-	fmt.Println(testeFantasma, ok) // 0, false
-
-	
-
-	// teste de existencia com if
-	if testeFantasma2, ok := amigos["fantasma"]; !ok {
-		fmt.Println("não existe no map")
-	} else {
-		fmt.Println(testeFantasma2)
-	}
-
-}
-
-```
+[Exemplo 1 - trabalhando com maps](https://play.golang.org/p/5qmIXSCN5Ov)
 
 ## Loop for
 
@@ -445,53 +378,14 @@ switch n {
 
 ## structs
 
-```go
-
-//criando tipo struct
-type teste struct {
-nome string
-cpf  string}
-
-//declarando variavel struct
-var u teste
-u.nome = "alan"
-u.cpf = "875.607.556-15"
-
-//declarando variável struct
-u2 := teste{"Carlos", "12"}
-
-//declarando variavel struct
-u3 := teste{nome: "samara"}
-   
-```
+### Criando structs
+[Exemplo 1 - Criando structs](https://play.golang.org/p/H8BG87NNC0e)
 
 ### Struct anonima
 
-
 Structs anomima com mapa e Slice embutidos: 
 
-```go
-
-package main
-
-import "fmt"
-
-func main() {
-
-	alan := struct {
-		telefone map[string]int
-		idiomas  []string
-	}{
-		telefone: map[string]int{
-			"celular": 22222222},
-		idiomas: []string{"ingles", "portugues"},
-	}
-
-	fmt.Println(alan)
-
-}
-
-```
+[Exemplo 1 - Struct Anonima](https://play.golang.org/p/jlEJYUQnZYG)
 
 
 ## Funções
@@ -499,7 +393,7 @@ func main() {
 ### Funções variádicas
 
 Uma função variádica pode receber n parametros.
-O parâmetro varidádico tem que ser o último.
+O parâmetro varidádico tem que ser o último.m
 A função converte os valores recebidos em um slice.
 Para mandar um slice para uma função com parametro variadico int
 é preciso usar notação de 3 pontos.
@@ -509,39 +403,24 @@ Vide exemplo abaixo:
 [Função variadia - exemplo1](https://play.golang.org/p/xYG5aWNyLbN)
 [Função varidica - exemplo2](https://play.golang.org/p/lYQyIUp975j)
 
-### - Funções - Clousure
+### Funções - Clousure
 
-Criamos um cloure ao criar uma funcao anonima dentro de outra função e chamar essa funcao anonima como retorno da outra função
-Isso permite à função anonima, usar parametros que são externos a ela.
-Exemplo abaixo:
+Criamos um cloure ao criar uma funcao anonima dentro de outra função e chamar essa funcao anonima como retorno da outra função.  
+Isso permite à função anonima, usar parametros que são externos a ela. Exemplos:
 
-```go
-func main() {
-   counter := 4
-
-   x := decrement(counter)
-   fmt.Println(x())
-   fmt.Println(x())
-   fmt.Println(x())
-   fmt.Println(x())
-
-}
-
-func decrement(i int) func() int {
-
-   return func() int {
-      i--
-      return i
-
-   }
-
-}
-```
+[Exemplo 1 - Clousure](https://play.golang.org/p/nvAUskka9GX)  
+[Exemplo 2 - Clousure](https://play.golang.org/p/kFBQe0MjM1X)  
 
 ### Função `init`
 
 Função que roda antes das outras. Serve para fazer setup antes da aplicação rodar.
 `func init(){}`
+
+### Funções callback
+Função callback é quando você usa uma função como parâmetro de outra função. 
+
+[Exemplo 1 - CAllback Function](https://play.golang.org/p/PXI8T0o6lxv)
+[Exemplo 2 - CAllback Funcion](https://play.golang.org/p/7nVW7vcN0fs)
 
 
 ### Funções como tipos
@@ -550,7 +429,8 @@ Em Go, uma função é um tipo, ou seja podemos criar tipos que são funções p
 
 ### Interfaces
 
-A melhor forma de se estudar interfaces é através dos exemplos comentados.  
+A melhor forma de se estudar interfaces é através dos exemplos comentados. 
+
 [Exemplo 1 - Interfaces](https://play.golang.org/p/4sY2v050sMK)
 
 
@@ -559,52 +439,10 @@ A melhor forma de se estudar interfaces é através dos exemplos comentados.
 
 Exemplo com explicação:
 
-```go
-
-var a := 100
-
-// B é um ponteiro de int
-var b *int
-
-// B aponta para endereço de A
-b = &a
-
-// imprime endereço de a (ja que ele aponta pra la)
-fmt.Println(b)
-
-// imprime o que está dentro do endereço de 
-fmt.Println(*b)
-
-// se mudar o valor de a, o valor de *b tb será alterado
-
-```
-
-Outro exemplo de ponteiro:
-
-```go
-package main
-
-import "fmt"
-
-func main() {
-   temperatura := 100
-   fatorEbulicao := 2
-
-   // Ponteiro nao aceita valor, logo deve ser passado endereço 
-   // do valor (da variavel que armazena valor)
-   pontoEbulicao(&temperatura, fatorEbulicao)
-   fmt.Println(temperatura)
-}
-]//declaracao de parametro do tipo ponteiro
-// esse parametro vai receber um endereço de memoria de alguma variavel
-func pontoEbulicao(temp *int, fe int) {
-
-   // Neste caso a funçao nao precisa de retorno
-   // pois já está alterando valor fora dela
-   // no caso, a variavel temperatura
-   *temp = *temp * fe
-}
-```
+[Exemplo 1 - Ponteiros](https://play.golang.org/p/tnYbNGp6YuF)
+[Exemplo 2 - Ponteiros](https://play.golang.org/p/dBgIOCpU7DH)
+[Exemplo 3 - Ponteiros](https://play.golang.org/p/nBFDufLNkPA)
+[Exemplo 4 - Ponteiros - Modificando um struct](https://play.golang.org/p/V8Cfk7mP1Wd)
 
 
 
@@ -614,6 +452,17 @@ Defer adia a execução de uma instrução no programa.
 Se tiver mais de um, a primeira instrução com DEFER   entrar na fila é o última a ser executada. O ponto de execução é a função na qual o DEFER foi criado, ou seja, ele executa a instrução antes da função encerrar (que pode ser antes do retorno). 
 
 [Exemplo - DEFER](https://play.golang.org/p/2wXTPjwYt4V)
+
+## Marshal Unmarshal Json
+
+[Exemplo 1 - Marshal and Unmarshal JSon](https://play.golang.org/p/R5N7Sfp-XJl)
+[Exemplo 2 - Marshal JSon](https://play.golang.org/p/cakcrC_ygYQ)]
+[Exemplo 3 - Unmarshal Json](https://play.golang.org/p/IIzg0SMDq9H)
+
+
+
+
+
 
 ## Erros
 
@@ -720,7 +569,7 @@ rand.Seed(time.Now().UnixNano())
 ### `unicode`
 
 Util para checar caracteres de uma string
-Exemplo de uso:
+Exemplo de uso: 
 
 ```go
 
