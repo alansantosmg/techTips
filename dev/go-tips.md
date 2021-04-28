@@ -1,5 +1,75 @@
 # Go Tips
-
+## Index
+- [Go Tips](#go-tips)
+	- [Index](#index)
+	- [Workflow Go projects](#workflow-go-projects)
+	- [Consulta documentação](#consulta-documentação)
+	- [Basic Go program](#basic-go-program)
+	- [Separação de domínios](#separação-de-domínios)
+	- [Instalação do GO](#instalação-do-go)
+		- [Linux](#linux)
+			- [Ajustar ambiente (GOPATH e GOROOT)](#ajustar-ambiente-gopath-e-goroot)
+	- [GO Doc](#go-doc)
+		- [Instalar Go Doc](#instalar-go-doc)
+			- [Windows](#windows)
+			- [Linux](#linux-1)
+		- [Acessar o godoc](#acessar-o-godoc)
+	- [Peculiaridades do GO](#peculiaridades-do-go)
+	- [trabalhando com módulos](#trabalhando-com-módulos)
+		- [Estrutura de pastas para módulos](#estrutura-de-pastas-para-módulos)
+			- [Módulos externos](#módulos-externos)
+			- [Remover dependencias não usadas](#remover-dependencias-não-usadas)
+			- [Referenciar módulos](#referenciar-módulos)
+	- [Go command line](#go-command-line)
+		- [GO fmt](#go-fmt)
+	- [Tipos primitivos](#tipos-primitivos)
+		- [Tipos númericos](#tipos-númericos)
+		- [Strings](#strings)
+			- [Declarando strings](#declarando-strings)
+			- [Verbos para formatação de strings](#verbos-para-formatação-de-strings)
+			- [Quebrar palavras em caracteres](#quebrar-palavras-em-caracteres)
+	- [Tipos compostos](#tipos-compostos)
+		- [Arrays x Slices](#arrays-x-slices)
+			- [Criando array (sempre tem tamanho fixo)](#criando-array-sempre-tem-tamanho-fixo)
+			- [Criando um slice](#criando-um-slice)
+			- [Trabalhando com Slices](#trabalhando-com-slices)
+				- [Excluir item de slice](#excluir-item-de-slice)
+				- [Adicionar um slice em outro slice](#adicionar-um-slice-em-outro-slice)
+				- [Make e slices](#make-e-slices)
+				- [Slice of slice](#slice-of-slice)
+				- [Pegadinha do malandro com Slices](#pegadinha-do-malandro-com-slices)
+	- [Maps](#maps)
+	- [Loop for](#loop-for)
+	- [for infinite loop](#for-infinite-loop)
+	- [If clause](#if-clause)
+	- [Switch case](#switch-case)
+	- [structs](#structs)
+		- [Criando structs](#criando-structs)
+		- [Struct anonima](#struct-anonima)
+	- [Funções](#funções)
+		- [Funções variádicas](#funções-variádicas)
+		- [Funções - Clousure](#funções---clousure)
+		- [Função `init`](#função-init)
+		- [Funções callback](#funções-callback)
+		- [Funções como tipos](#funções-como-tipos)
+		- [Interfaces](#interfaces)
+	- [Ponteiros](#ponteiros)
+	- [Defer (adiar)](#defer-adiar)
+	- [Marshal Unmarshal Json](#marshal-unmarshal-json)
+	- [Erros](#erros)
+	- [Logs](#logs)
+		- [Log Setflags](#log-setflags)
+	- [Tests](#tests)
+		- [Coverage](#coverage)
+	- [Pacotes interessantes](#pacotes-interessantes)
+		- [`math/big`](#mathbig)
+		- [`math/rand`](#mathrand)
+		- [`unicode`](#unicode)
+		- [`time`](#time)
+		- [`Error`](#error)
+	- [Concorrência](#concorrência)
+		- [go routines](#go-routines)
+	- [Compilaçao cruzada](#compilaçao-cruzada)
 
 ## Workflow Go projects
 
@@ -597,8 +667,6 @@ exemplos:
 time.Now()
 time.Monday
 
-
-
 //criando variavel do tipo time
 startUpTime time.Time = time.Now()
 
@@ -611,3 +679,33 @@ startUpTime := time.Now()
 ```go
 errors.New("input can't be a negative number")
 ```
+
+## Concorrência
+
+### go routines
+
+Go routines são uma forma de executar funções de forma concorrente em Go. 
+Conceitos: 
+Criar variável do tipo waitGroup do pacote sync. 
+Colocar essa variável dentro do escopo que pode ser lido pelas funções que terão Go Routines. 
+criar um waitGroup.Add() e dentro do parentesis colocar o numero de funções controladas pelo Go. 
+Ao final de cada função colocar um waitGroup.Done(). 
+Se for na função a anomima o done vem dentro da função. 
+
+`runtime.NumCPU()` permite ver quantos processadores a maquina possui  
+`runtime.NumGoroutine()` permite ver quantas go routines estão em execução  
+
+[Exemplo 1 - Go Routines - funções](https://play.golang.org/p/R8W9X8-rbjK)  
+[Exemplo 2 - Go Routines - funções anônimas](https://play.golang.org/p/ALid1L4OYJK)  
+[exemplo 3 - Go Routines 18 func](https://play.golang.org/p/u-P9jfRv1VO)  
+
+**Mensagem de erro**
+`fatal error: all goroutines are asleep - deadlock!`
+Pode ocorrer quando o numero de go routines é maior que o contador da variavel waitgroup
+
+## Compilaçao cruzada
+
+ `GOOS=windows GOARCH=amd64 go build main.go`
+ `GOOS=darwin GOARCH=amd64 go build main.go`
+ `GOOS=linux GOARCH=amd64 go build main.go`
+
