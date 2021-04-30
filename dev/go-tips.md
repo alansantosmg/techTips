@@ -502,6 +502,7 @@ Em Go, uma função é um tipo, ou seja podemos criar tipos que são funções p
 A melhor forma de se estudar interfaces é através dos exemplos comentados. 
 
 [Exemplo 1 - Interfaces](https://play.golang.org/p/4sY2v050sMK)
+[Exemplo 2 - Interfaces](https://play.golang.org/p/8QzzD7Veoic)
 
 
 

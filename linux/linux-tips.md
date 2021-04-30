@@ -350,3 +350,8 @@ Ncurses disk usage: `sudo apt-get install ncdu`
 O numero de inodes é limitado por device. As vezes um disco pode conter milhões de arquivos pequenos, usar pouco espaço mas acabar com os inodes disponíveis.
 
  /dev/nu
+
+
+echo "blacklist floppy" | sudo tee /etc/modprobe.d/blacklist-floppy.conf
+sudo rmmod floppy
+sudo dpkg-reconfigure initramfs-tools
