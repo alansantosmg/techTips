@@ -369,6 +369,125 @@
 
 ### 9.1 
 
+1. They've got two children.
+2. She hasn't got a key. 
+3. he's got a new job. 
+4. Have you got an umbrella? 
+5. We've got a lot of work to do. 
+6. I haven't got your phone number. 
+7. Has your father got a camera? 
+8. How much money have we got? 
+
+### 9.2
+
+1. Do you have any money? 
+2. I don't have many clothes. 
+3. Does tom have a brother? 
+4. How many children do they have? 
+5. Do you have any questions? 
+6. Sam doesn't have a job.
+   
+### 9.3
+
+1. he hasn't got a car. 
+2. Yes. He's got.
+3. No, I haven't got. 
+4. Yes. I've got. 
+5. No, I haven't got
+6. Yes. I've got two brothers and sisters. 
+7. I've got a dog. Her name's preta. 
+8. I haven't got a bike, but I wish to have one. 
+9. Yes. I have a brother and His name is Hudson.    
+
+### 9.4 
+
+1. Sarah doens't have a car. She goes evreywhere by bike. 
+2. They like animals. They have three dogs and two cats. 
+3. Charles isn't happy. He has a lot of problems.
+4. They are always busy. They don't have much free time. 
+5. What's wrong? I have something in my eye. 
+6. Where's my pen? I don't know. I don't have it. 
+7. Amy wants to go to the concert, but she doesn't have a ticket. 
+
+### 9.5
+
+1. I'm not feeling very well. I've got a headache. 
+2. Everybody likes tom. He has got a lot of friends. 
+3. she cant' open the door. She hasn't got a key. 
+4. Quick! We haven't got much time. 
+5. An insect has got six legs. 
+6. I'm unemployed. I haven't got a job. 
+   
+## 10 Was / Were
+
+### 10.1
+
+1. Joe was in the bed. 
+2. Jack and kate were in the cinema.
+3. Sue was in the train station
+4. Mr. and Mrs Hall were having lunch
+5. Ben was on the beach. 
+6. I was studying.
+
+### 10.2
+
+1. Last year she was 22. she is 23 now. 
+2. Today the weather is nice, but yesterday it was very cold. 
+3. I was hungry. Can I have something to eat? 
+4. I feel fine this morning, but I was very tired last night.
+5. Where was you at 11 o'clock last friday? 
+6. Don't buy those shoes. They're very expensive. 
+7. I like your new jacket. Was it very expensive? 
+8. This time last year I was in Paris. 
+9. Where are Sam and Joe? I don't know. They were here a few minutes ago. 
+
+### 10.3
+
+1. We weren't happy with the hotel. Our room was very small and it wasn't clean.
+2. Mark wasn't at work last week because he was ill. He's better now
+3. Yesterday was a public holiday, so the banks were closed. They're open today. 
+4. Were Kate and Ben at the party?  Kate was there, but ben wasn't. 
+5. Where are my keys? They were on the table, but they're not there now. 
+6. You wasn't at hoje last night. Where was you?
+   
+### 10.4
+
+1. Why were you late this morning? The traffic was bad. 
+2. Was your exam difficult? No it was easy. 
+3. Where were Sue and Chris last week? They were on holiday. 
+4. How much was your camera? A hundred pounds. 
+5. why was you angry yesterday?  Because you were late. 
+6. Was the weather nice last week? Yes. It was beautiful. 
+
+## 11 Worked / got / went (past simple)
+
+### 11.1
+
+1. I cleaned my teeth three times yesterday. 
+2. It was hot in the room. So I opened the window. 
+3. The film was very long. It started at 7.15 and finished at 10 o'clock. 
+4. When I was child, I wanted to be a doctor. 
+5. The accident happened last Sunday afternoon.
+6. The weather is nice today, but yesterday it rained all day. 
+7. we enjoyed our holiday last year. We stood at at very nice place. 
+8. Anna's grandfather died when he was 90 years old. 
+
+### 11.2 
+
+1. get - got
+2. see - saw
+3. play - played
+4. pay - paid
+5. visit - visited
+6. buy - bought
+7. go - went
+8. think - thougt
+9. copy - copied
+10. know - knew
+11. put - put
+12. speak - spoke
+
+### 11.3
 
 
 

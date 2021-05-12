@@ -69,6 +69,16 @@
 		- [`Error`](#error)
 	- [Concorrência](#concorrência)
 		- [go routines](#go-routines)
+		- [Mutex](#mutex)
+		- [Detecção de condição de corrida](#detecção-de-condição-de-corrida)
+		- [Atomic](#atomic)
+		- [Canais](#canais)
+			- [Direcionamento de canais](#direcionamento-de-canais)
+			- [Ranges e close channel](#ranges-e-close-channel)
+			- [Select](#select)
+			- [Comma Ok](#comma-ok)
+			- [Convergência](#convergência)
+			- [Divergencia](#divergencia)
 	- [Compilaçao cruzada](#compilaçao-cruzada)
 
 ## Workflow Go projects
@@ -703,6 +713,136 @@ Se for na função a anomima o done vem dentro da função.
 **Mensagem de erro**
 `fatal error: all goroutines are asleep - deadlock!`
 Pode ocorrer quando o numero de go routines é maior que o contador da variavel waitgroup
+
+### Mutex
+Mutex é uma forma de travar parte do código para impedir que determinadas variaveis sejam acessadas por mais de uma go routine ao mesmo tempo. Ou seja, ao travar a variavel uma go routine de cada vez vai acessar a variavel dentro de um determinado processo e impedir que qualquer outra rotina acesse essa memoria até acabar o processo iniciado. 
+
+Como funciona: 
+
+Criar a variavel mutex:
+
+`var mu sync.Mutex`
+
+Essa variável vai gerar 2 métodos:  lock e unlock. 
+
+No início do código que quero que não tenha espaço de memória invadido coloco o lock, e o final coloco o unlock. 
+
+```go
+var mu sync.Mutex()
+
+mu.Lock()
+meu código...
+...
+...
+mu.Unlock()
+```
+
+[Exemplo 1 - Mutex](https://play.golang.org/p/NoQTsKWylsj)
+
+### Detecção de condição de corrida
+
+Rodar o programa com o parametro -race: 
+`go run -race main.go`
+
+Se houver condição de corrida, será exibida mensagem. Se não houver, o programa rodará normalmente. 
+
+### Atomic
+
+Atomic funciona de forma diferente de Mutex. O programador encapsula a variavel que quer incrementar com atomic, adicionando o incremento ao endereço da variável. 
+
+Exemplo (não roda no go playground):
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"runtime"
+	"sync"
+	"sync/atomic"
+)
+
+const info = `
+Application %s starting.
+The binary was build by GO: %s`
+
+func main() {
+
+	log.Printf(info, "APP Name example", runtime.Version())
+
+	var contador int64 = 0 // com atomic tem que especifcar o tipo de int
+	totalGoroutines := 1000
+
+	var wg sync.WaitGroup
+
+	wg.Add(totalGoroutines)
+
+	for i := 0; i < totalGoroutines; i++ {
+		go func() {
+			atomic.AddInt64(&contador, 1) // escolher metodo compativel
+			runtime.Gosched()
+			fmt.Println("contador\t", atomic.LoadInt64(&contador))
+			wg.Done()
+		}()
+		fmt.Println("contador\t", runtime.NumGoroutine())
+	}
+	wg.Wait()
+	fmt.Println(contador)
+}
+```
+
+### Canais
+
+Um canal é uma váriavel que recebe uma informação em algum ponto do programa e entrega essa informação em outro lugar. É mais usado do que waitgroups, mutex ou atomic. 
+
+Canais precisam de go routines para rodar. Isso acontece porque quando se coloca informação em um canal, o programa bloqueia a continuidade da execução até a informação ser entregue. 
+
+Canais devem ser declarados com make: 
+`canal := make (chan int)`
+
+Você pode criar a variavel do canal fora da goroutine, porém a atribuição de valor do canal tem que ser feita dentro da goroutine.   
+
+Tirar o valor de um canal pode ser feito fora de uma goroutine.   
+
+[Exemplo 1 - Canal](https://play.golang.org/p/SkgujlhnCEX)
+
+#### Direcionamento de canais
+
+- Canais podem ser bidirecionais ou unidirecionais. 
+- Canais podem conter buffers.
+- Na prática buffers nunca são usados. 
+- Um canal bidirecional pode ser convertido unidirecional. 
+- Um canal unidirecional não pode ser convertido em bidirecional. 
+
+[Exemplo 1 - Direcionamento de canais](https://play.golang.org/p/Aa-SZZr4Gmb)
+
+#### Ranges e close channel
+
+Ao iterar em canal através de range é necessário fechar o canal 
+quando não houver mais loops para iterar, senão dá deadlock, pois o receptor fica esperando receber mais coisas. Ele não tem como saber que não há mais dados para enviar. vide exemplo
+
+[Exemplo 1 - Range e close](https://play.golang.org/p/FEIbfVvMfmG)
+
+#### Select
+
+#### Comma Ok
+
+A notação comma ok pode ser utilizada para verificar se uma determinada informação foi enviada pelo canal. É util para verificar por exemplo se o valor zero de um canal é zero porque foi enviado zero através dele, ou se é zero justamente porque não foi enviada informação. 
+
+[Exemplo 1 - Comma Ok](https://play.golang.org/p/BvbdbuY9vn9)
+
+#### Convergência
+
+Convergência é quando pegamos informações de dois canais e canalizamos o fluxo para 1 canal. 
+
+[Exemplo 1 - Convergência](https://play.golang.org/p/8Uk_L4esAqq)
+
+#### Divergencia
+
+Diverg~encia é quando pegamos informações de 1 canal e distribuimos para outro canal. Exemplo comentado abaixo
+
+[Exemplo 1 - Divergência](https://play.golang.org/p/TJR3KzbO8hL)
 
 ## Compilaçao cruzada
 
